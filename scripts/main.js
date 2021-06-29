@@ -6,6 +6,40 @@ const navesContador = document.getElementById("naves");
 preencherContadores();
 preencherTabela();
 
+google.charts.load("current", { packages: ["corechart"] });
+google.charts.setOnLoadCallback(desenharGrafico);
+
+async function desenharGrafico() {
+  const response = await swapiGet("vehicles/");
+  const vehiclesArray = response.data.results;
+
+  const dataArray = [];
+  dataArray.push(["Planetas", "População"]);
+  vehiclesArray.forEach((vehicles) => {
+    dataArray.push([vehicles.name, Number(vehicles.max_atmosphering_speed)]);
+  });
+
+  console.log(dataArray);
+
+  var data = google.visualization.arrayToDataTable(dataArray);
+
+  var options = {
+    title: "Veículos mais utilizados na Saga",
+    legend: {position: 'bottom', textStyle: {color: 'black', fontSize: 16}},
+    
+
+    is3D: "true",
+    fontSize: "16",
+    colors:['#786fa6','#c44569', '#e15f41', '#546de5', '#f19066', '#cf6a87', '#e77f67', '#778beb', '#f7d794', '#f3a683']
+  };
+
+  var chart = new google.visualization.PieChart(
+    document.getElementById("piechart")
+  );
+
+  chart.draw(data, options);
+}
+
 
 function preencherContadores() {
     Promise.all([
@@ -39,3 +73,5 @@ async function preencherTabela() {
 function swapiGet(param) {
     return axios.get(`https://swapi.dev/api/${param}`);
 }
+
+console.log(swapiGet("species/"));
