@@ -4,23 +4,28 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     list-style: none;
+  
+}
+
+html {
+    font-size: 62.5%;
 }
 
 .container {
-
+    display: flex;
 }
 
 .container .menu-lateral {
     background-color: black;
     height: 100vh;
-    width: 250px;
+    width: 25rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     color: white;
     font-style: bold;
-    font-size: 16px;
+    font-size: 1.6rem;
 }
 
 
@@ -28,12 +33,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 3rem;
    
 }
 
 .container .menu-lateral ul li img{
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
 
 .container .menu-lateral .settings{
@@ -42,5 +47,82 @@
 }
 
 .container .menu-lateral .settings img {
-    margin-right: 10px;
+    margin-right: 1rem;
+}
+
+/* Content */
+
+.content {
+    background: #F5F6FA;
+    width: 100%;
+}
+
+.content .cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4rem;
+}
+
+.content .cards .card {
+    display: flex;
+    width: 24rem;
+    height: 13.2rem;
+    background-color: #fff;
+    border-radius: 1.6rem;
+    box-shadow: .4rem .4rem 1.5rem 0rem #00000040;
+    margin-right: 4.6rem;
+    justify-content: space-between;
+}
+
+.content .cards .card.big {
+    display: flex;
+    width: 46.4rem;
+    height: 13.2rem;
+    background-color: #fff;
+    justify-content: space-around;
+    
+}
+
+.content .cards .card.big .card-content{
+    position: relative;
+}
+
+
+.content .cards .card .card-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.content .cards .card .card-content .card-info {
+    margin-right: 3.0rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.content .cards .card .card-content .card-info h2 {
+    font-size: 5.4rem;
+    font-weight: 900;
+    line-height: 6.3rem;
+    color: #FFBA33;
+}
+
+.content .cards .card .card-content .card-info p {
+    font-weight: 600;
+    line-height: 1.9rem;
+    color: #000;
+    font-size: 1.6rem;
+}
+
+.content .cards .card.big .card-content:first-child::after{
+    content: '';
+    display: block;
+    background: #000;
+    width: .1rem;
+    height: 8.0rem;
+    display: flex;
+    position: absolute;
+    left: 100%;
 }
