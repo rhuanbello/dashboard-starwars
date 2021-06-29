@@ -1,7 +1,3 @@
-if(window.SimpleAnime) {
-  new SimpleAnime();
-}
-
 const personagensContador = document.getElementById("personagens");
 const luasContador = document.getElementById("luas");
 const planetasContador = document.getElementById("planetas");
@@ -14,13 +10,13 @@ google.charts.load("current", { packages: ["corechart"] });
 google.charts.setOnLoadCallback(desenharGrafico);
 
 async function desenharGrafico() {
-  const response = await swapiGet("vehicles/");
-  const vehiclesArray = response.data.results;
+  const response = await swapiGet("people/");
+  const peopleArray = response.data.results;
 
   const dataArray = [];
   dataArray.push(["Planetas", "População"]);
-  vehiclesArray.forEach((vehicles) => {
-    dataArray.push([vehicles.name, Number(vehicles.max_atmosphering_speed)]);
+  peopleArray.forEach((people) => {
+    dataArray.push([people.name, Number(people.height)]);
   });
 
   console.log(dataArray);
@@ -28,7 +24,7 @@ async function desenharGrafico() {
   var data = google.visualization.arrayToDataTable(dataArray);
 
   var options = {
-    title: "Veículos mais utilizados na Saga",
+    title: "Personagens mais Altos da Saga",
     legend: {position: 'bottom', textStyle: {color: 'black', fontSize: 16}},
     pieSliceTextStyle: {fontSize: 12, bold: 'true'},
     is3D: "true",
@@ -60,14 +56,14 @@ function preencherContadores() {
 }
 
 async function preencherTabela() {
-    const response = await swapiGet('films/');
+    const response = await swapiGet('people/');
     const tableData = response.data.results;
-    tableData.forEach(film => {
-        $('#filmsTable').append(`<tr>
-        <td>${film.title}</td>
-        <td>${moment(film.release_date).format("DD/MM/YYYY")}</td>
-        <td>${film.director}</td>
-        <td>${film.episode_id}</td>
+    tableData.forEach(people => {
+        $('#personagensTable').append(`<tr>
+        <td>${people.name}</td>
+        <td>${people.height} cm</td>
+        <td>${people.mass} kg</td>
+        <td>${people.birth_year}</td>
         </tr>`)
     })
     
@@ -76,5 +72,3 @@ async function preencherTabela() {
 function swapiGet(param) {
     return axios.get(`https://swapi.dev/api/${param}`);
 }
-
-console.log(swapiGet("species/"));
